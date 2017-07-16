@@ -1,0 +1,10 @@
+library(testthat)
+library(NoaaCS)
+library(readr)
+library(stringr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(leaflet)
+
+test_check("NoaaCS")
