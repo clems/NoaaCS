@@ -3,3 +3,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^test_run.R$
+^\.travis\.yml$
