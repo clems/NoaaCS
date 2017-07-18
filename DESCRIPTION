@@ -27,7 +27,7 @@ Description: Package that can be used to work with the NOAA Significant Earthqua
     accessible to people without knowledge of the intimate details of the dataset or of R. This package 
     provides the tools for processing and visualizing the data so that others may extract some use out 
     of the information embedded within.
-License: GPL (>= 3)
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
