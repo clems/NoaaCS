@@ -44,12 +44,12 @@ eq_clean_data(data)
 
 ## Visualize earthquake timeline
 
-The next three functions utilize `ggplot2` package to visualize earthquake timeline. The basic `geom_timeline()` geom requires clean data from the previous paragraph. The required aesthetics is `x` with dates, optional are `y` for grouping by country, and `size` and `color` that can be use according to user needs. The `geom_timeline_label()` function requires additional `label` aesthetic for labeling. For better visualization of these two geoms, `theme_timeline()` theme was added. Here is an example:
+The next three functions use `ggplot2` package to visualize earthquake timeline. The basic `geom_timeline()` geom requires clean data from the previous paragraph. The required aesthetics is `x` with dates, optional are `y` for grouping by country, and `size` and `color` that can be use according to user needs. The `geom_timeline_label()` function requires additional `label` aesthetic for labeling. For better visualization of these two geoms, `theme_timeline()` theme was added. Here is an example:
 
 ```{r eq_timeline_example, fig.width = 7, fig.height = 4}
 data %>% eq_clean_data() %>%
-    filter(COUNTRY %in% c("GREECE", "ITALY"), YEAR > 2000) %>%
-    ggplot(aes(x = DATE,
+     filter(COUNTRY %in% c("USA", "CHINA"), YEAR > 2000, TOTAL_DEATHS>0) %>%
+     ggplot(aes(x = DATE,
                 y = COUNTRY,
                 color = as.numeric(TOTAL_DEATHS),
                 size = as.numeric(EQ_PRIMARY)
@@ -62,7 +62,7 @@ data %>% eq_clean_data() %>%
 
 ## Visualize earthquakes on map
 
-The package utilized `leaflet` functions to visualize earthquakes on a map using `eq_map()` function. The map is automatically trimmed to display the input data frame. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details:
+The package uses `leaflet` functions to visualize earthquakes on a map using `eq_map()` function. The map is automatically trimmed to display the input data frame. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details:
 
 ```{r eq_map_example, fig.width = 7, fig.height = 4}
 data %>% 

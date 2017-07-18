@@ -59,6 +59,8 @@ eq_clean_data <- function(raw_data) {
                                      stringr::str_pad(ifelse(is.na(DAY), 1, DAY),2,"left","0"),
                                      sep = "-"),
                    DATE = ~ lubridate::ymd(DATE_s) -lubridate::years(2*abs(YEAR))*BC_date,
+                   DEATHS = ~ as.numeric(as.character(DEATHS)),
+                   TOTAL_DEATHS = ~ as.numeric(as.character(TOTAL_DEATHS)),
                    LONGITUDE = ~ as.numeric(as.character(LONGITUDE)),
                    LATITUDE = ~ as.numeric(as.character(LATITUDE))) %>%
                    eq_location_clean() %>%

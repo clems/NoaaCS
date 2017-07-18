@@ -20,6 +20,7 @@ test_that("Noaa pkg tests", {
                            LOCATION_NAME = c("ISRAEL: ARIHA (JERICHO)","ICELAND: VESTMANNAEYJAR, HELLA"),
                            LATITUDE = c("31.5","63.966"),
                            LONGITUDE = c("35.3","-20.487"),
+                           TOTAL_DEATHS = c(NA, 10),
                            DEATHS = c(NA, 10))
 
   # test location cleaner
