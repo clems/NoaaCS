@@ -17,14 +17,14 @@
 #'
 #' @importFrom tidyr separate_
 #' @importFrom dplyr mutate_ select_
-#' @importFrom stringr str_to_title
+#' @importFrom stringr str_to_title str_trim
 #' @importFrom magrittr %>%
 #'
 #' @export
 eq_location_clean <- function(raw_data){
   x <- raw_data %>%
     tidyr::separate_("LOCATION_NAME", into = c("country", "LOCATION_NAME"), sep = ":", extra = "drop" ) %>%
-    dplyr::mutate_(LOCATION_NAME = ~stringr::str_to_title(LOCATION_NAME)) %>%
+    dplyr::mutate_(LOCATION_NAME = ~stringr::str_trim(stringr::str_to_title(LOCATION_NAME))) %>%
     dplyr::select_(quote(-country))
 }
 
@@ -59,8 +59,8 @@ eq_clean_data <- function(raw_data) {
                                      stringr::str_pad(ifelse(is.na(DAY), 1, DAY),2,"left","0"),
                                      sep = "-"),
                    DATE = ~ lubridate::ymd(DATE_s) -lubridate::years(2*abs(YEAR))*BC_date,
-                   LONGITUDE = ~ as.numeric(LONGITUDE),
-                   LATITUDE = ~ as.numeric(LATITUDE)) %>%
+                   LONGITUDE = ~ as.numeric(as.character(LONGITUDE)),
+                   LATITUDE = ~ as.numeric(as.character(LATITUDE))) %>%
                    eq_location_clean() %>%
                    dplyr::select_(.dots = c('-DATE_s', '-BC_date'))
 }
