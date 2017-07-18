@@ -1,10 +1,10 @@
 ---
-title: "Overview of the NoasCS package"
+title: "Overview of the NoaaCS package"
 author: "Clément Schaff"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Overview of the NoasCS package}
+  %\VignetteIndexEntry{Overview of the NoaaCS package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
