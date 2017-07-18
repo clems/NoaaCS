@@ -64,6 +64,4 @@ test_that("Noaa pkg tests", {
 #   dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>%
 #   eq_map(annot_col = "DATE")
 
-
-  expect_that(1, is_a("numeric"))
 })
