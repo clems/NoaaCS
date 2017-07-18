@@ -110,17 +110,18 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #'
 #' @importFrom ggplot2 theme theme_bw element_line element_blank element_text
 #' @export
-theme_timeline <-   ggplot2::theme_bw() +
-  ggplot2::theme(legend.position='bottom',
-        legend.title = ggplot2::element_text(face = "bold" ),
-        panel.grid.major = ggplot2::element_blank(),
-        panel.grid.minor = ggplot2::element_blank(),
-        panel.border = ggplot2::element_blank(),
-        axis.title.y	= ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_line(size = 1),
-        axis.ticks.y = ggplot2::element_blank(),
-        axis.line.x  = ggplot2::element_line(size = 1)
-  )
+theme_timeline <-   function(){
+  ggplot2::theme_bw() +
+    ggplot2::theme(legend.position='bottom',
+                   legend.title = ggplot2::element_text(face = "bold" ),
+                   panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   panel.border = ggplot2::element_blank(),
+                   axis.title.y	= ggplot2::element_blank(),
+                   axis.ticks.x = ggplot2::element_line(size = 1),
+                   axis.ticks.y = ggplot2::element_blank(),
+                   axis.line.x  = ggplot2::element_line(size = 1)
+  )}
 
 #' @title geom_timeline
 #' @description Plots hurricane radii on a ggmap object representing the maximum windspeed

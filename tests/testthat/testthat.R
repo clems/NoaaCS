@@ -43,7 +43,7 @@ test_that("Noaa pkg tests", {
     geom_timeline(data = eq_clean_test_table, aes(x = DATE, size = EQ_PRIMARY, y = COUNTRY, color = DEATHS)) +
     scale_size_continuous(name  ="Richter scale value") +
     scale_colour_continuous(name  ="# deaths") +
-    theme_timeline
+    theme_timeline()
 
   expect_is(p1, "ggplot")
   expect_is(p1$layers[[1]]$geom, "GeomTimeline")
@@ -57,7 +57,7 @@ test_that("Noaa pkg tests", {
     geom_timeline_label(data = noteworthy_eq, aes(x = DATE, label = LOCATION_NAME)) +
     scale_size_continuous(name  ="Richter scale value") +
     scale_colour_continuous(name  ="# deaths") +
-    theme_timeline
+    theme_timeline()
 
   expect_is(p2, "ggplot")
   expect_is(p2$layers[[2]]$geom, "GeomTimelineLabel")

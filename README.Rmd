@@ -61,7 +61,7 @@ data %>% eq_clean_data() %>%
      )) +
      geom_timeline() +
      geom_timeline_label(aes(label = LOCATION_NAME), n_max = 5) +
-     theme_timeline +
+     theme_timeline() +
      labs(size = "Richter scale value", color = "# deaths")
 ```
 

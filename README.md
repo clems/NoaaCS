@@ -47,7 +47,7 @@ data %>% eq_clean_data() %>%
      )) +
      geom_timeline() +
      geom_timeline_label(aes(label = LOCATION_NAME), n_max = 5) +
-     theme_timeline +
+     theme_timeline() +
      labs(size = "Richter scale value", color = "# deaths")
 #> Warning: Too few values at 720 locations: 7, 19, 27, 32, 47, 50, 52, 53,
 #> 71, 88, 108, 113, 126, 131, 140, 146, 149, 163, 171, 177, ...

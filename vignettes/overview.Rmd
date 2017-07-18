@@ -48,15 +48,15 @@ The next three functions utilize `ggplot2` package to visualize earthquake timel
 
 ```{r eq_timeline_example, fig.width = 7, fig.height = 4}
 data %>% eq_clean_data() %>%
-     filter(COUNTRY %in% c("GREECE", "ITALY"), YEAR > 2000) %>%
-     ggplot(aes(x = DATE,
+    filter(COUNTRY %in% c("GREECE", "ITALY"), YEAR > 2000) %>%
+    ggplot(aes(x = DATE,
                 y = COUNTRY,
                 color = as.numeric(TOTAL_DEATHS),
                 size = as.numeric(EQ_PRIMARY)
      )) +
      geom_timeline() +
      geom_timeline_label(aes(label = LOCATION_NAME), n_max = 5) +
-     theme_timeline +
+     theme_timeline() +
      labs(size = "Richter scale value", color = "# deaths")
 ```
 
