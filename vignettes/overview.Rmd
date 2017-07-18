@@ -29,29 +29,31 @@ There are six exported functions available to users:
 - `eq_create_label()`
 - `eq_map()`
 
-Further we give a short description with examples how to use the functions. For the purposes of these examples we will use data from NOAA that can be found in the package directory under `\extdata` folder.
-
 ## Clean data
 
-The first function is required to clean data for the visualization. It creates a DATE column in `Date` format, transforms latitude and longitude to numeric format and trims country from LOCATION_NAME.
+The  function `eq_clean_data` preprocess the data. It creates a DATE column in `Date` format, transforms latitude and longitude to numeric format and trims country from LOCATION_NAME.
 
 ```{r eq_read_example, message = FALSE}
 filename <- system.file("extdata/signif.txt", package = "NoaaCS")
-data <- readr::read_delim(filename, delim = "\t")
+data <- readr::read_tsv(filename)
 
 eq_clean_data(data)
 ```
 
 ## Visualize earthquake timeline
 
-The next three functions use `ggplot2` package to visualize earthquake timeline. The basic `geom_timeline()` geom requires clean data from the previous paragraph. The required aesthetics is `x` with dates, optional are `y` for grouping by country, and `size` and `color` that can be use according to user needs. The `geom_timeline_label()` function requires additional `label` aesthetic for labeling. For better visualization of these two geoms, `theme_timeline()` theme was added. Here is an example:
+Three functions use `ggplot2` to plot an earthquake timeline:
+
+- `geom_timeline()` requires cleaned data. You should provide dates to the required aesthetics `x` , and countries to the optional aesthetics `y`. , You can set `size` and `color` according to your needs. 
+- The `geom_timeline_label()` function requires additional `label` aesthetic for labeling. 
+- A `theme_timeline()` is available as well. 
 
 ```{r eq_timeline_example, fig.width = 7, fig.height = 4}
 data %>% eq_clean_data() %>%
-     filter(COUNTRY %in% c("USA", "CHINA"), YEAR > 2000, TOTAL_DEATHS>0) %>%
+     filter(COUNTRY %in% c("USA", "CHINA"), YEAR > 2000, DEATHS>0) %>%
      ggplot(aes(x = DATE,
                 y = COUNTRY,
-                color = as.numeric(TOTAL_DEATHS),
+                color = DEATHS,
                 size = as.numeric(EQ_PRIMARY)
      )) +
      geom_timeline() +
@@ -62,7 +64,7 @@ data %>% eq_clean_data() %>%
 
 ## Visualize earthquakes on map
 
-The package uses `leaflet` functions to visualize earthquakes on a map using `eq_map()` function. The map is automatically trimmed to display the input data frame. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details:
+The package uses `leaflet` functions to show earthquakes on a map using `eq_map()` function. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details.
 
 ```{r eq_map_example, fig.width = 7, fig.height = 4}
 data %>% 

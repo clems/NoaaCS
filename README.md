@@ -2,7 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/clems/NoaaCS.svg?branch=master)](https://travis-ci.org/clems/NoaaCS)
 
-This vignette gives a brief overview of the NoasCS R package created for the purpose of visualizing NOAA earthquake data. It processes data from [NOAA database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) and visualizes them using `ggplot2` and `leaflet` packages.
+The NoasCS R package is created to visualize NOAA earthquake data. It processes data from [NOAA database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) and visualizes them using `ggplot2` and `leaflet` packages.
 
 Package functions
 -----------------
@@ -16,16 +16,14 @@ There are six exported functions available to users:
 -   `eq_create_label()`
 -   `eq_map()`
 
-Further we give a short description with examples how to use the functions. For the purposes of these examples we will use data from NOAA that can be found in the package directory under `\extdata` folder.
-
 Clean data
 ----------
 
-The first function is required to clean data for the visualization. It creates a DATE column in `Date` format, transforms latitude and longitude to numeric format and trims country from LOCATION\_NAME.
+The function `eq_clean_data` preprocess the data. It creates a DATE column in `Date` format, transforms latitude and longitude to numeric format and trims country from LOCATION\_NAME.
 
 ``` r
 filename <- system.file("extdata/signif.txt", package = "NoaaCS")
-data <- readr::read_delim(filename, delim = "\t")
+data <- readr::read_tsv(filename)
 
 eq_clean_data(data)
 #> Warning: Too few values at 720 locations: 7, 19, 27, 32, 47, 50, 52, 53,
@@ -35,7 +33,11 @@ eq_clean_data(data)
 Visualize earthquake timeline
 -----------------------------
 
-The next three functions use `ggplot2` package to visualize earthquake timeline. The basic `geom_timeline()` geom requires clean data from the previous paragraph. The required aesthetics is `x` with dates, optional are `y` for grouping by country, and `size` and `color` that can be use according to user needs. The `geom_timeline_label()` function requires additional `label` aesthetic for labeling. For better visualization of these two geoms, `theme_timeline()` theme was added. Here is an example:
+Three functions use `ggplot2` to plot an earthquake timeline:
+
+-   `geom_timeline()` requires cleaned data. You should provide dates to the required aesthetics `x` , and countries to the optional aesthetics `y`. , You can set `size` and `color` according to your needs.
+-   The `geom_timeline_label()` function requires additional `label` aesthetic for labeling.
+-   A `theme_timeline()` is available as well.
 
 ``` r
 data %>% eq_clean_data() %>%
@@ -60,4 +62,4 @@ data %>% eq_clean_data() %>%
 Visualize earthquakes on map
 ----------------------------
 
-The package uses `leaflet` functions to visualize earthquakes on a map using `eq_map()` function. The map is automatically trimmed to display the input data frame. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details.
+The package uses `leaflet` functions to show earthquakes on a map using `eq_map()` function. Optional annotations can be created using `eq_create_label()` function. The result is an interactive map where user can click on individual points to get details.
